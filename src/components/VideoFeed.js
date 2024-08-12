@@ -21,9 +21,9 @@ const VideoFeed = () => {
   const [activeVideo, setActiveVideo] = useState(null);
 
   const handleScroll = () => {
-    if (activeVideo !== null) return; // If a video is active, do not auto-play others
+    if (activeVideo !== null) return; 
 
-    const fraction = 0.1; // Play when 10% of the player is visible.
+    const fraction = 0.1; 
     const videoElements = document.querySelectorAll('video');
 
     videoElements.forEach((video, index) => {

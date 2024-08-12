@@ -23,7 +23,7 @@ const VideoCard = ({ src, isActive, onInteraction }) => {
     <div
       className="relative"
       onClick={handleInteraction}
-      onTouchStart={handleInteraction} // Handles touch events
+      onTouchStart={handleInteraction}
     >
       <video
         ref={videoRef}
