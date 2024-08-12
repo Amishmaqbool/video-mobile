@@ -1,17 +1,25 @@
 import React, { useEffect, useRef } from 'react';
 
-const VideoCard = ({ src, isActive, onInteraction }) => {
+const VideoCard = ({ src, isActive, onInteraction, isMobile }) => {
   const videoRef = useRef(null);
 
   useEffect(() => {
     const video = videoRef.current;
 
-    if (isActive) {
-      video.play();
+    if (isMobile) {
+      if (isActive) {
+        video.play();
+      } else {
+        video.pause();
+      }
     } else {
-      video.pause();
+      if (isActive) {
+        video.play();
+      } else {
+        video.pause();
+      }
     }
-  }, [isActive]);
+  }, [isActive, isMobile]);
 
   const handleInteraction = () => {
     if (onInteraction) {
@@ -23,7 +31,7 @@ const VideoCard = ({ src, isActive, onInteraction }) => {
     <div
       className="relative"
       onClick={handleInteraction}
-      onTouchStart={handleInteraction}
+      onTouchStart={handleInteraction} 
     >
       <video
         ref={videoRef}

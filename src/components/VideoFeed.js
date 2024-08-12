@@ -19,11 +19,12 @@ const videos = [
 
 const VideoFeed = () => {
   const [activeVideo, setActiveVideo] = useState(null);
+  const [isMobile, setIsMobile] = useState(window.innerWidth < 768);
 
   const handleScroll = () => {
-    if (activeVideo !== null) return; 
+    if (isMobile) return;
 
-    const fraction = 0.1; 
+    const fraction = 0.1;
     const videoElements = document.querySelectorAll('video');
 
     videoElements.forEach((video, index) => {
@@ -47,18 +48,24 @@ const VideoFeed = () => {
   };
 
   const handleVideoInteraction = (index) => {
-    setActiveVideo(index);
+    if (isMobile) {
+      setActiveVideo(index);
+    }
   };
 
   useEffect(() => {
+    const handleResize = () => {
+      setIsMobile(window.innerWidth < 768);
+    };
+
     window.addEventListener('scroll', handleScroll);
-    window.addEventListener('resize', handleScroll);
+    window.addEventListener('resize', handleResize);
 
     return () => {
       window.removeEventListener('scroll', handleScroll);
-      window.removeEventListener('resize', handleScroll);
+      window.removeEventListener('resize', handleResize);
     };
-  }, [activeVideo]);
+  }, [activeVideo, isMobile]);
 
   return (
     <div className="p-4 space-y-10">
@@ -68,6 +75,7 @@ const VideoFeed = () => {
             src={src}
             isActive={activeVideo === index}
             onInteraction={() => handleVideoInteraction(index)}
+            isMobile={isMobile}
           />
           <h3 className='pt-2 font-bold'>Lorem Ipsum</h3>
           <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et dictum ipsum. Vestibulum molestie finibus vulputate. Morbi hendrerit risus orci, a placerat erat vestibulum vitae.</p>
