@@ -46,11 +46,7 @@ const VideoFeed = () => {
     });
   };
 
-  const handleVideoClick = (index) => {
-    setActiveVideo((prevIndex) => (prevIndex === index ? null : index));
-  };
-
-  const handleVideoTouch = (index) => {
+  const handleVideoInteraction = (index) => {
     setActiveVideo(index);
   };
 
@@ -65,15 +61,16 @@ const VideoFeed = () => {
   }, [activeVideo]);
 
   return (
-    <div className="p-4 space-y-4">
+    <div className="p-4 space-y-10">
       {videos.map((src, index) => (
         <div key={index} className="max-w-4xl mx-auto">
           <VideoCard
             src={src}
             isActive={activeVideo === index}
-            onClick={() => handleVideoClick(index)}
-            onTouch={() => handleVideoTouch(index)}
+            onInteraction={() => handleVideoInteraction(index)}
           />
+          <h3 className='pt-2 font-bold'>Lorem Ipsum</h3>
+          <p>Lorem ipsum dolor sit amet, consectetur adipiscing elit. Pellentesque et dictum ipsum. Vestibulum molestie finibus vulputate. Morbi hendrerit risus orci, a placerat erat vestibulum vitae.</p>
         </div>
       ))}
     </div>

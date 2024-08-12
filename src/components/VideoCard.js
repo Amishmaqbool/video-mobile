@@ -1,6 +1,6 @@
 import React, { useEffect, useRef } from 'react';
 
-const VideoCard = ({ src, isActive, onClick, onTouch }) => {
+const VideoCard = ({ src, isActive, onInteraction }) => {
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -10,21 +10,30 @@ const VideoCard = ({ src, isActive, onClick, onTouch }) => {
       video.play();
     } else {
       video.pause();
-      video.currentTime = 0;
     }
   }, [isActive]);
 
+  const handleInteraction = () => {
+    if (onInteraction) {
+      onInteraction();
+    }
+  };
+
   return (
-    <video
-      ref={videoRef}
-      src={src}
-      className="w-full max-w-full h-auto cursor-pointer"
-      loop
-      muted
-      playsInline
-      onClick={onClick}
-      onTouchStart={onTouch} // Handle touch events
-    />
+    <div
+      className="relative"
+      onClick={handleInteraction}
+      onTouchStart={handleInteraction} // Handles touch events
+    >
+      <video
+        ref={videoRef}
+        src={src}
+        className="w-full max-w-full h-auto"
+        loop
+        muted
+        playsInline
+      />
+    </div>
   );
 };
 
