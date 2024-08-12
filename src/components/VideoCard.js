@@ -1,6 +1,6 @@
-import React, { useRef, useState, useEffect } from 'react';
+import React, { useEffect, useRef } from 'react';
 
-const VideoCard = ({ src, isActive, onClick }) => {
+const VideoCard = ({ src, isActive, onClick, onTouch }) => {
   const videoRef = useRef(null);
 
   useEffect(() => {
@@ -23,6 +23,7 @@ const VideoCard = ({ src, isActive, onClick }) => {
       muted
       playsInline
       onClick={onClick}
+      onTouchStart={onTouch} // Handle touch events
     />
   );
 };

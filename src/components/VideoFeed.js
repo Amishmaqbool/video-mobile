@@ -50,6 +50,10 @@ const VideoFeed = () => {
     setActiveVideo((prevIndex) => (prevIndex === index ? null : index));
   };
 
+  const handleVideoTouch = (index) => {
+    setActiveVideo(index);
+  };
+
   useEffect(() => {
     window.addEventListener('scroll', handleScroll);
     window.addEventListener('resize', handleScroll);
@@ -68,6 +72,7 @@ const VideoFeed = () => {
             src={src}
             isActive={activeVideo === index}
             onClick={() => handleVideoClick(index)}
+            onTouch={() => handleVideoTouch(index)}
           />
         </div>
       ))}
